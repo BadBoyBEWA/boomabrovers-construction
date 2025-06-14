@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://boomabrovers.onrender.com/sitemap.xml

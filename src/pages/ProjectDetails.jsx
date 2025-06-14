@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiArrowRight, FiMapPin, FiCalendar, FiDollarSign } from 'react-icons/fi'
+import { FiArrowRight, FiMapPin, FiCalendar, FiDollarSign, FiArrowLeft } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 
 const ProjectDetails = () => {
@@ -94,6 +94,146 @@ const ProjectDetails = () => {
         'Efficient project scheduling',
       ],
     },
+    3: {
+      title: 'Industrial Warehouse Complex',
+      category: 'Industrial',
+      location: 'Houston, TX',
+      completionDate: 'March 2024',
+      budget: '$12M',
+      description: 'State-of-the-art industrial facility with advanced logistics and automation systems.',
+      mainImage: '/images/projects/industrial-1.jpg',
+      gallery: [
+        '/images/projects/industrial-1-gallery-1.jpg',
+        '/images/projects/industrial-1-gallery-2.jpg',
+        '/images/projects/industrial-1-gallery-3.jpg',
+        '/images/projects/industrial-1-gallery-4.jpg',
+      ],
+      features: [
+        'Automated Storage Systems',
+        'Loading Docks',
+        'Employee Facilities',
+        'Security Systems',
+        'Energy Management',
+        'Sustainable Design',
+      ],
+      challenges: [
+        'Complex automation integration',
+        'Large-scale logistics planning',
+        'Safety compliance requirements',
+        'Environmental impact mitigation',
+      ],
+      solutions: [
+        'Advanced automation planning',
+        'Comprehensive safety protocols',
+        'Sustainable construction methods',
+        'Efficient resource management',
+      ],
+    },
+    4: {
+      title: 'Historic Building Restoration',
+      category: 'Renovation',
+      location: 'Boston, MA',
+      completionDate: 'January 2024',
+      budget: '$6.5M',
+      description: 'Restoration of a historic landmark while preserving its architectural integrity.',
+      mainImage: '/images/projects/renovation-1.jpg',
+      gallery: [
+        '/images/projects/renovation-1-gallery-1.jpg',
+        '/images/projects/renovation-1-gallery-2.jpg',
+        '/images/projects/renovation-1-gallery-3.jpg',
+        '/images/projects/renovation-1-gallery-4.jpg',
+      ],
+      features: [
+        'Historical Preservation',
+        'Modern Amenities Integration',
+        'Seismic Retrofitting',
+        'Energy Efficiency Upgrades',
+        'Accessibility Improvements',
+        'Heritage Documentation',
+      ],
+      challenges: [
+        'Preserving historical elements',
+        'Meeting modern building codes',
+        'Limited documentation',
+        'Material matching',
+      ],
+      solutions: [
+        'Expert historical consultation',
+        'Custom material fabrication',
+        'Innovative preservation techniques',
+        'Detailed documentation process',
+      ],
+    },
+    5: {
+      title: 'Luxury Apartment Complex',
+      category: 'Residential',
+      location: 'Miami, FL',
+      completionDate: 'February 2024',
+      budget: '$15M',
+      description: 'High-end residential development with premium amenities and ocean views.',
+      mainImage: '/images/projects/residential-2.jpg',
+      gallery: [
+        '/images/projects/residential-2-gallery-1.jpg',
+        '/images/projects/residential-2-gallery-2.jpg',
+        '/images/projects/residential-2-gallery-3.jpg',
+        '/images/projects/residential-2-gallery-4.jpg',
+      ],
+      features: [
+        'Private Beach Access',
+        'Infinity Pool',
+        'Luxury Spa',
+        'Concierge Service',
+        'Smart Home Systems',
+        'Premium Finishes',
+      ],
+      challenges: [
+        'Coastal construction regulations',
+        'High-end material sourcing',
+        'Weather constraints',
+        'Premium quality standards',
+      ],
+      solutions: [
+        'Expert coastal engineering',
+        'Global material sourcing',
+        'Weather-resistant construction',
+        'Quality control systems',
+      ],
+    },
+    6: {
+      title: 'Shopping Mall Expansion',
+      category: 'Commercial',
+      location: 'Los Angeles, CA',
+      completionDate: 'April 2024',
+      budget: '$20M',
+      description: 'Major expansion project of an existing shopping mall with new retail spaces.',
+      mainImage: '/images/projects/commercial-2.jpg',
+      gallery: [
+        '/images/projects/commercial-2-gallery-1.jpg',
+        '/images/projects/commercial-2-gallery-2.jpg',
+        '/images/projects/commercial-2-gallery-3.jpg',
+        '/images/projects/commercial-2-gallery-4.jpg',
+      ],
+      features: [
+        'New Retail Spaces',
+        'Food Court Expansion',
+        'Entertainment Center',
+        'Parking Structure',
+        'Digital Signage',
+        'Customer Experience Zones',
+      ],
+      challenges: [
+        'Minimizing business disruption',
+        'Complex logistics',
+        'Safety during construction',
+        'Budget management',
+      ],
+      solutions: [
+        'Phased construction approach',
+        'Advanced logistics planning',
+        'Comprehensive safety protocols',
+        'Value engineering',
+      ],
+    },
   }
 
   const project = projectDetails[id] || projectDetails[1]
@@ -122,6 +262,17 @@ const ProjectDetails = () => {
 
   return (
     <div className="min-h-screen pt-20">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-10">
+        <Link
+          to="/projects"
+          className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          <FiArrowLeft className="mr-2" />
+          Back to Projects
+        </Link>
+      </div>
+
       {/* Hero Section */}
       <section className="relative py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
