@@ -29,6 +29,58 @@ A modern, responsive website built with React and Tailwind CSS, inspired by the 
 - Tailwind CSS
 - Framer Motion
 - React Icons
+- Google Analytics
+- Sentry Error Tracking
+- Web Vitals Monitoring
+
+## Monitoring and Analytics
+
+### Google Analytics
+- Tracks user behavior and website performance
+- Monitors page views, user sessions, and conversion rates
+- Integrated with Web Vitals for performance monitoring
+- Custom event tracking for user interactions
+- Enhanced ecommerce tracking
+- Debug mode in development environment
+- Secure cookie configuration
+- Cross-domain tracking support
+
+### Sentry Error Tracking
+- Real-time error tracking and monitoring
+- Session replay for debugging
+- Performance monitoring with custom spans
+- Console logging integration
+- Browser tracing for performance analysis
+- Environment-aware error reporting
+- Release tracking
+- User feedback collection
+- Privacy-focused session replay
+- Custom breadcrumb tracking
+
+### Web Vitals
+- Core Web Vitals monitoring (LCP, FID, CLS)
+- Custom performance metrics
+- Resource loading optimization
+- Navigation timing tracking
+- User interaction monitoring
+- API performance tracking
+- Custom event tracking
+- Real-time performance alerts
+- Performance budget enforcement
+- Automated performance reporting
+
+### Performance Budgets
+- First Contentful Paint: < 1.5s
+- Largest Contentful Paint: < 2.5s
+- Time to Interactive: < 3.5s
+- Cumulative Layout Shift: < 0.1
+- First Input Delay: < 100ms
+- Interaction to Next Paint: < 200ms
+- Total Bundle Size: < 200KB
+- Image Size Limits:
+  - Hero Images: < 200KB
+  - Gallery Images: < 100KB
+  - Thumbnails: < 50KB
 
 ## Getting Started
 
@@ -113,7 +165,14 @@ boomabrovers-construction/
 
 This project is licensed under the MIT License.
 
+## Documentation
+
+- [API Documentation](API_DOCUMENTATION.md) - Detailed API endpoints and usage
+- [Deployment Guide](DEPLOYMENT_GUIDE.md) - Instructions for deploying the application
+- [Contributing Guidelines](CONTRIBUTING.md) - How to contribute to the project
+- [Performance Guide](PERFORMANCE_GUIDE.md) - Performance optimization guidelines
+
 ## Contact
 
 - Email: your.email@example.com
-- Project Link: [https://github.com/yourusername/boomabrovers-construction](https://github.com/yourusername/boomabrovers-construction)
+- Project Link: [https://github.com/thewa/boomabrovers-construction](https://github.com/thewa/boomabrovers-construction)

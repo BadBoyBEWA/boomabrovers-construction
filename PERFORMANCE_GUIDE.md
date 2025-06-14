@@ -75,18 +75,174 @@
    - Largest Contentful Paint (LCP): < 2.5s
    - Time to Interactive (TTI): < 3.5s
    - Cumulative Layout Shift (CLS): < 0.1
+   - First Input Delay (FID): < 100ms
+   - Interaction to Next Paint (INP): < 200ms
 
 2. **Web Vitals**
    ```javascript
-   import { getCLS, getFID, getLCP } from 'web-vitals';
+   import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
    
    function sendToAnalytics({ name, delta, id }) {
      // Send to analytics
+     gtag('event', name, {
+       value: Math.round(name === 'CLS' ? delta * 1000 : delta),
+       event_category: 'Web Vitals',
+       event_label: id,
+       non_interaction: true,
+     });
    }
    
-   getCLS(sendToAnalytics);
-   getFID(sendToAnalytics);
-   getLCP(sendToAnalytics);
+   onCLS(sendToAnalytics);
+   onFCP(sendToAnalytics);
+   onLCP(sendToAnalytics);
+   onTTFB(sendToAnalytics);
+   onINP(sendToAnalytics);
+   ```
+
+3. **Google Analytics Integration**
+   ```html
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKJB4EX7LD"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-ZKJB4EX7LD', {
+       send_page_view: true,
+       debug_mode: process.env.NODE_ENV === 'development',
+       cookie_flags: 'SameSite=None;Secure',
+       allow_google_signals: true,
+       allow_ad_personalization_signals: true
+     });
+   </script>
+   ```
+
+4. **Sentry Error Tracking**
+   ```javascript
+   import * as Sentry from '@sentry/react';
+   import { Replay } from '@sentry/replay';
+   import { BrowserTracing } from '@sentry/tracing';
+
+   Sentry.init({
+     dsn: "YOUR_SENTRY_DSN",
+     environment: process.env.NODE_ENV,
+     release: process.env.REACT_APP_VERSION,
+     tracesSampleRate: 1.0,
+     replaysSessionSampleRate: 0.1,
+     replaysOnErrorSampleRate: 1.0,
+     integrations: [
+       new BrowserTracing({
+         tracePropagationTargets: ['localhost', /^https:\/\/boomabrovers\.com/],
+       }),
+       Sentry.consoleLoggingIntegration({
+         levels: ['error', 'warn', 'info'],
+       }),
+       new Replay({
+         maskAllText: true,
+         blockAllMedia: true,
+       }),
+     ],
+     beforeSend(event) {
+       if (event.exception) {
+         Sentry.showReportDialog({ eventId: event.event_id });
+       }
+       return event;
+     },
+   });
+   ```
+
+5. **Custom Performance Monitoring**
+   ```javascript
+   // Track custom metrics
+   export const createSpan = (name, operation, callback) => {
+     return Sentry.startSpan(
+       {
+         op: operation,
+         name: name,
+         data: {
+           environment: process.env.NODE_ENV,
+           timestamp: new Date().toISOString(),
+         },
+       },
+       callback
+     );
+   };
+
+   // Monitor resource loading
+   export const monitorPerformance = () => {
+     if ('performance' in window) {
+       const observer = new PerformanceObserver((list) => {
+         for (const entry of list.getEntries()) {
+           // Log to console in development
+           if (process.env.NODE_ENV === 'development') {
+             console.log(`${entry.name}: ${entry.duration}`);
+           }
+           
+           // Send to analytics
+           gtag('event', 'performance_metric', {
+             metric_name: entry.name,
+             metric_value: entry.duration,
+             metric_id: entry.id,
+           });
+           
+           // Send to Sentry
+           Sentry.addBreadcrumb({
+             category: 'performance',
+             message: `${entry.name}: ${entry.duration}`,
+             level: 'info',
+           });
+         }
+       });
+       
+       observer.observe({ 
+         entryTypes: [
+           'resource',
+           'paint',
+           'largest-contentful-paint',
+           'first-input',
+           'layout-shift',
+           'longtask'
+         ] 
+       });
+     }
+   };
+
+   // Track user interactions
+   export const trackUserInteraction = (action, category, label) => {
+     gtag('event', action, {
+       event_category: category,
+       event_label: label,
+       timestamp: new Date().toISOString(),
+     });
+   };
+
+   // Monitor API calls
+   export const monitorApiCall = async (url, options) => {
+     const startTime = performance.now();
+     try {
+       const response = await fetch(url, options);
+       const endTime = performance.now();
+       
+       // Track API performance
+       gtag('event', 'api_call', {
+         url: url,
+         duration: endTime - startTime,
+         status: response.status,
+       });
+       
+       return response;
+     } catch (error) {
+       // Track API errors
+       Sentry.captureException(error, {
+         extra: {
+           url,
+           options,
+           duration: performance.now() - startTime,
+         },
+       });
+       throw error;
+     }
+   };
    ```
 
 ## Build Optimization
