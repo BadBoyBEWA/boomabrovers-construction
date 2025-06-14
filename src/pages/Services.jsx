@@ -8,6 +8,7 @@ const Services = () => {
       icon: <FiHome className="w-8 h-8" />,
       title: 'Residential Construction',
       description: 'Custom home building and residential renovations tailored to your lifestyle.',
+      image: '/images/services/residential.jpg.jpeg',
       features: [
         'Custom home design and construction',
         'Home renovations and remodeling',
@@ -19,6 +20,7 @@ const Services = () => {
       icon: <FiTool className="w-8 h-8" />,
       title: 'Commercial Construction',
       description: 'Full-service commercial construction solutions for businesses of all sizes.',
+      image: '/images/services/commercial.jpg',
       features: [
         'Office buildings and retail spaces',
         'Restaurant and hospitality projects',
@@ -30,6 +32,7 @@ const Services = () => {
       icon: <FiLayers className="w-8 h-8" />,
       title: 'Interior Design',
       description: 'Transform your space with our expert interior design services.',
+      image: '/images/services/interior.jpg',
       features: [
         'Space planning and optimization',
         'Color schemes and material selection',
@@ -41,6 +44,7 @@ const Services = () => {
       icon: <FiLayout className="w-8 h-8" />,
       title: 'Architecture',
       description: 'Innovative architectural solutions for residential and commercial projects.',
+      image: '/images/services/architecture.jpg',
       features: [
         'Architectural design and planning',
         '3D modeling and visualization',
@@ -52,6 +56,7 @@ const Services = () => {
       icon: <FiSettings className="w-8 h-8" />,
       title: 'Project Management',
       description: 'Comprehensive project management ensuring timely and efficient delivery.',
+      image: '/images/services/project-management.jpg',
       features: [
         'Project planning and scheduling',
         'Budget management',
@@ -63,6 +68,7 @@ const Services = () => {
       icon: <FiCheckCircle className="w-8 h-8" />,
       title: 'Consulting',
       description: 'Expert consulting services for construction and design projects.',
+      image: '/images/services/consulting.jpg',
       features: [
         'Construction feasibility studies',
         'Cost estimation and analysis',
@@ -82,12 +88,12 @@ const Services = () => {
         {/* Open Graph */}
         <meta property="og:title" content="Construction Services - Boomabrovers Construction" />
         <meta property="og:description" content="Comprehensive construction services including residential, commercial, and industrial projects. Quality and excellence in every build." />
-        <meta property="og:image" content="/images/services-og.jpg" />
+        <meta property="og:image" content="/images/services/commercial.jpg" />
         
         {/* Twitter */}
         <meta name="twitter:title" content="Construction Services - Boomabrovers Construction" />
         <meta name="twitter:description" content="Comprehensive construction services including residential, commercial, and industrial projects. Quality and excellence in every build." />
-        <meta name="twitter:image" content="/images/services-og.jpg" />
+        <meta name="twitter:image" content="/images/services/commercial.jpg" />
         
         {/* Structured Data */}
         <script type="application/ld+json">
@@ -142,6 +148,11 @@ const Services = () => {
                   className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
                 >
                   <div className="text-blue-600 mb-4">{service.icon}</div>
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-48 object-cover rounded-lg mb-4"
+                  />
                   <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
                   <ul className="space-y-2">

@@ -1,7 +1,7 @@
 import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
 import * as Sentry from '@sentry/react';
 import { Replay } from '@sentry/replay';
-import { BrowserTracing } from '@sentry/tracing';
+import { browserTracingIntegration } from '@sentry/react';
 
 let isSentryInitialized = false;
 
@@ -25,7 +25,7 @@ export const initSentry = () => {
       enableLogs: true,
     },
     integrations: [
-      new BrowserTracing({
+      browserTracingIntegration({
         tracePropagationTargets: ['localhost', /^https:\/\/boomabrovers-construction\.onrender\.com/],
       }),
       Sentry.consoleLoggingIntegration({ 

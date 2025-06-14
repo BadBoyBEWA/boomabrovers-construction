@@ -4,12 +4,6 @@ import { FiArrowRight } from 'react-icons/fi'
 import { Helmet } from 'react-helmet'
 
 const Home = () => {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 }
-  }
-
   const services = [
     {
       title: 'Construction',
@@ -79,7 +73,7 @@ const Home = () => {
           {/* Background Image with Overlay */}
           <div className="absolute inset-0">
             <img
-              src="/images/hero-bg.jpg"
+              src="/images/hero/hero-bg.jpg"
               alt="Construction Site"
               className="w-full h-full object-cover"
             />
