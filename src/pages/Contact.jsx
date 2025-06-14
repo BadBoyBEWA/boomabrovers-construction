@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMapPin, FiPhone, FiMail, FiClock } from 'react-icons/fi'
 import emailjs from '@emailjs/browser';
+import { Helmet } from 'react-helmet'
 
 const Contact = () => {
   const form = useRef();
@@ -89,221 +90,265 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get in touch with us for any inquiries or to discuss your project.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <>
+      <Helmet>
+        <title>Contact Us - Boomabrovers Construction | Get in Touch</title>
+        <meta name="description" content="Contact Boomabrovers Construction for your construction needs. Reach out to our team for inquiries, quotes, or to discuss your project requirements." />
+        <meta name="keywords" content="contact construction company, construction inquiry, building quote, construction consultation, Nigeria construction contact" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact Boomabrovers Construction - Get in Touch" />
+        <meta property="og:description" content="Reach out to our team for inquiries, quotes, or to discuss your construction project requirements." />
+        <meta property="og:image" content="/images/contact-og.jpg" />
+        
+        {/* Twitter */}
+        <meta name="twitter:title" content="Contact Boomabrovers Construction - Get in Touch" />
+        <meta name="twitter:description" content="Reach out to our team for inquiries, quotes, or to discuss your construction project requirements." />
+        <meta name="twitter:image" content="/images/contact-og.jpg" />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Boomabrovers Construction",
+            "description": "Contact page for Boomabrovers Construction",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Boomabrovers Construction",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+234-XXX-XXX-XXXX",
+                "contactType": "customer service",
+                "areaServed": "Nigeria",
+                "availableLanguage": ["English"]
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Lagos",
+                "addressCountry": "Nigeria"
+              }
+            }
+          })}
+        </script>
+      </Helmet>
 
-      {/* Contact Information */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {contactInfo.map((info, index) => (
+      <div className="min-h-screen pt-20">
+        {/* Hero Section */}
+        <section className="relative py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-center"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Get in touch with us for any inquiries or to discuss your project.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Contact Information */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white p-6 rounded-lg shadow-lg text-center"
+                >
+                  <info.icon className="w-8 h-8 mx-auto mb-4 text-blue-600" />
+                  <h3 className="text-lg font-semibold mb-2">{info.title}</h3>
+                  <p className="text-gray-600">{info.content}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Contact Form */}
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-lg text-center"
+                transition={{ duration: 0.5 }}
               >
-                <info.icon className="w-8 h-8 mx-auto mb-4 text-blue-600" />
-                <h3 className="text-lg font-semibold mb-2">{info.title}</h3>
-                <p className="text-gray-600">{info.content}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-              <AnimatePresence mode="wait">
-                {success ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="bg-green-100 text-green-800 p-4 rounded-md mb-6"
-                  >
-                    Thank you for your message! We will get back to you soon.
-                  </motion.div>
-                ) : (
-                  <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-                    {submitError && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-red-100 text-red-800 p-4 rounded-md"
-                      >
-                        {submitError}
-                      </motion.div>
-                    )}
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
-                          errors.name ? 'border-red-300' : 'border-gray-300'
-                        }`}
-                      />
-                      {errors.name && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.name}
-                        </motion.p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
-                          errors.email ? 'border-red-300' : 'border-gray-300'
-                        }`}
-                      />
-                      {errors.email && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.email}
-                        </motion.p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
-                          errors.phone ? 'border-red-300' : 'border-gray-300'
-                        }`}
-                      />
-                      {errors.phone && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.phone}
-                        </motion.p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
-                        Subject
-                      </label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
-                          errors.subject ? 'border-red-300' : 'border-gray-300'
-                        }`}
-                      />
-                      {errors.subject && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.subject}
-                        </motion.p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows="4"
-                        className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
-                          errors.message ? 'border-red-300' : 'border-gray-300'
-                        }`}
-                      />
-                      {errors.message && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-sm mt-1"
-                        >
-                          {errors.message}
-                        </motion.p>
-                      )}
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className={`w-full bg-blue-600 text-white px-6 py-3 rounded-md transition-colors ${
-                        isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-blue-700'
-                      }`}
+                <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
+                <AnimatePresence mode="wait">
+                  {success ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className="bg-green-100 text-green-800 p-4 rounded-md mb-6"
                     >
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
-                    </button>
-                  </form>
-                )}
-              </AnimatePresence>
-            </motion.div>
+                      Thank you for your message! We will get back to you soon.
+                    </motion.div>
+                  ) : (
+                    <form ref={form} onSubmit={handleSubmit} className="space-y-6">
+                      {submitError && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="bg-red-100 text-red-800 p-4 rounded-md"
+                        >
+                          {submitError}
+                        </motion.div>
+                      )}
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.name ? 'border-red-300' : 'border-gray-300'
+                          }`}
+                        />
+                        {errors.name && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.name}
+                          </motion.p>
+                        )}
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.email ? 'border-red-300' : 'border-gray-300'
+                          }`}
+                        />
+                        {errors.email && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.email}
+                          </motion.p>
+                        )}
+                      </div>
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                          Phone
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.phone ? 'border-red-300' : 'border-gray-300'
+                          }`}
+                        />
+                        {errors.phone && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.phone}
+                          </motion.p>
+                        )}
+                      </div>
+                      <div>
+                        <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
+                          Subject
+                        </label>
+                        <input
+                          type="text"
+                          id="subject"
+                          name="subject"
+                          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.subject ? 'border-red-300' : 'border-gray-300'
+                          }`}
+                        />
+                        {errors.subject && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.subject}
+                          </motion.p>
+                        )}
+                      </div>
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                          Message
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows="4"
+                          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.message ? 'border-red-300' : 'border-gray-300'
+                          }`}
+                        />
+                        {errors.message && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm mt-1"
+                          >
+                            {errors.message}
+                          </motion.p>
+                        )}
+                      </div>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={`w-full bg-blue-600 text-white px-6 py-3 rounded-md transition-colors ${
+                          isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-blue-700'
+                        }`}
+                      >
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                      </button>
+                    </form>
+                  )}
+                </AnimatePresence>
+              </motion.div>
 
-            {/* Map */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="h-[500px] rounded-lg overflow-hidden"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253682.8655827536!2d3.3366549!3d6.5480559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2s!4v1709912345678!5m2!1sen!2s"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Office Location"
-              />
-            </motion.div>
+              {/* Map */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="h-[500px] rounded-lg overflow-hidden"
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253682.8655827536!2d3.3366549!3d6.5480559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2s!4v1709912345678!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Office Location"
+                />
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   )
 }
 

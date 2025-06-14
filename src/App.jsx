@@ -1,6 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { Helmet } from 'react-helmet'
+import { ErrorBoundary, initSentry, initGA, trackPageView, monitorPerformance, createSpan, logger } from './utils/monitoring'
 import './index.css'
 
 // Layout Components
@@ -19,9 +21,21 @@ import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
 import ComingSoon from './pages/ComingSoon'
 
+// Initialize monitoring tools once
+initSentry();
+initGA();
+monitorPerformance();
+
 const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Track page view when location changes
+    trackPageView(location.pathname);
+  }, [location]);
+
   return (
-    <Router>
+    <ErrorBoundary fallback={<div>Something went wrong. Please try again later.</div>}>
       <Helmet>
         <title>Boomabrovers Construction - Leading Construction Company in Nigeria</title>
         <meta name="description" content="Boomabrovers Construction is a leading construction company in Nigeria, specializing in residential, commercial, and industrial projects. Quality construction services with a focus on sustainability and innovation." />
@@ -49,6 +63,38 @@ const App = () => {
         <link rel="canonical" href="https://boomabrovers-construction.onrender.com/" />
       </Helmet>
 
+      <button 
+        onClick={() => {throw new Error("This is your first error!");}}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#ff4444',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          zIndex: 1000,
+          boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+          transition: 'all 0.3s ease',
+          fontSize: '14px',
+          fontWeight: 'bold'
+        }}
+        onMouseOver={(e) => {
+          e.target.style.backgroundColor = '#ff0000';
+          e.target.style.transform = 'scale(1.05)';
+        }}
+        onMouseOut={(e) => {
+          e.target.style.backgroundColor = '#ff4444';
+          e.target.style.transform = 'scale(1)';
+        }}
+      >
+        Break the world
+      </button>
+
+      
+
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
@@ -69,7 +115,7 @@ const App = () => {
         </main>
         <Footer />
       </div>
-    </Router>
+    </ErrorBoundary>
   )
 }
 
